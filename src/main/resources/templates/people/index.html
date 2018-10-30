@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of People</title>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<h1>List of People</h1>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="person : ${people}">
+        <td >
+            <a
+                    th:href="@{/people/{id}(id=${person.id})}"
+                    th:text="${person.getFullName()}"
+            >
+            </a>
+        </td>
+
+        <td>
+            <form th:action="@{/people/{id}(id=${person.id})}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <input type="submit" value="X">
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
